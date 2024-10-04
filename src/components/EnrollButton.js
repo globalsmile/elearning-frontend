@@ -1,6 +1,6 @@
-// src/components/EnrollButton.js
-import React from 'react';
+mport React from 'react';
 import axios from 'axios';
+import Button from '@mui/material/Button';
 
 const EnrollButton = ({ courseId }) => {
   const handleEnroll = async () => {
@@ -12,9 +12,7 @@ const EnrollButton = ({ courseId }) => {
     }
   };
 
-  return (
-    <button onClick={handleEnroll}>Enroll</button>
-  );
+  return <Button variant="contained" color="primary" onClick={handleEnroll}>Enroll</Button>;
 };
 
 export default EnrollButton;

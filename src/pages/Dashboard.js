@@ -1,5 +1,6 @@
-mport React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Container, Typography, List, ListItem, ListItemText } from '@mui/material';
 
 const Dashboard = () => {
   const [recommendedCourses, setRecommendedCourses] = useState([]);
@@ -13,14 +14,18 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div>
-      <h2>Recommended Courses for You</h2>
-      <ul>
+    <Container>
+      <Typography variant="h4" gutterBottom>
+        Recommended Courses for You
+      </Typography>
+      <List>
         {recommendedCourses.map(course => (
-          <li key={course._id}>{course.title}</li>
+          <ListItem key={course._id}>
+            <ListItemText primary={course.title} />
+          </ListItem>
         ))}
-      </ul>
-    </div>
+      </List>
+    </Container>
   );
 };
 
