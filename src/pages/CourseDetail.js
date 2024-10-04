@@ -1,7 +1,8 @@
-mport React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import EnrollButton from '../components/EnrollButton';
+import { Container, Typography, Card, CardContent, CircularProgress } from '@mui/material';
 
 const CourseDetail = () => {
   const { id } = useParams();
@@ -16,15 +17,23 @@ const CourseDetail = () => {
   }, [id]);
 
   if (!course) {
-    return <div>Loading...</div>;
+    return <CircularProgress />;
   }
 
   return (
-    <div>
-      <h2>{course.title}</h2>
-      <p>{course.description}</p>
-      <EnrollButton courseId={course._id} />
-    </div>
+    <Container>
+      <Card>
+        <CardContent>
+          <Typography variant="h4" gutterBottom>
+            {course.title}
+          </Typography>
+          <Typography variant="body1" paragraph>
+            {course.description}
+          </Typography>
+          <EnrollButton courseId={course._id} />
+        </CardContent>
+      </Card>
+    </Container>
   );
 };
 
