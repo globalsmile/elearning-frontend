@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { Container, TextField, Button, Typography, Box } from '@mui/material';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
