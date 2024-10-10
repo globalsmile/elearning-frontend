@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import { Schema as _Schema, model } from 'mongoose';
+const Schema = _Schema;
 
 const CourseSchema = new Schema({
   title: { type: String, required: true },
@@ -10,4 +10,4 @@ const CourseSchema = new Schema({
   updatedAt: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.model('Course', CourseSchema);
+export default model('Course', CourseSchema);

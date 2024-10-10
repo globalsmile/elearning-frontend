@@ -1,7 +1,7 @@
 // src/controllers/recommendationController.js
-const express = require('express');
-const router = express.Router();
-const { getRecommendedCourses } = require('../utils/recommendationEngine');
+import { Router } from 'express';
+const router = Router();
+import { getRecommendedCourses } from '../utils/recommendationEngine';
 
 router.get('/recommendations', async (req, res) => {
   const userId = req.user.id; // Assume req.user is set after authentication
@@ -9,4 +9,4 @@ router.get('/recommendations', async (req, res) => {
   res.json(recommendedCourses);
 });
 
-module.exports = router;
+export default router;

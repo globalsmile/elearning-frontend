@@ -1,3 +1,4 @@
+// src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -5,9 +6,7 @@ import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
-import Profile from './pages/Profile';
-import CourseList from './pages/CourseList';
-import CourseDetail from './pages/CourseDetail';
+import Dashboard from './pages/Dashboard';
 
 const theme = createTheme({
   palette: {
@@ -29,9 +28,7 @@ function App() {
           <Route path="/signup" component={SignUp} />
           <Route path="/forgot-password" component={ForgotPassword} />
           <Route path="/reset-password/:token" component={ResetPassword} />
-          <Route path="/profile" component={Profile} />
-          <Route path="/courses" component={CourseList} />
-          <Route path="/courses/:id" component={CourseDetail} />
+          <Route path="/dashboard" component={Dashboard} /> {/* Updated Route */}
         </Switch>
       </Router>
     </ThemeProvider>

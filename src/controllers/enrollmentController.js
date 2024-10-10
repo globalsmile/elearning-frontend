@@ -1,17 +1,17 @@
 // src/controllers/enrollmentController.js
-const express = require('express');
-const router = express.Router();
-const Course = require('../models/Course'); // Assume we have a Course model
-const User = require('../models/User'); // Assume we have a User model
+import { Router } from 'express';
+const router = Router();
+import { findById } from '../models/Course'; // Assume we have a Course model
+import { findById as _findById } from '../models/User'; // Assume we have a User model
 
 // Enroll in a course
 router.post('/courses/:id/enroll', async (req, res) => {
-  const course = await Course.findById(req.params.id);
+  const course = await findById(req.params.id);
   if (!course) {
     return res.status(404).send('Course not found');
   }
 
-  const user = await User.findById(req.user.id); // Assume req.user is set after authentication
+  const user = await _findById(req.user.id); // Assume req.user is set after authentication
   if (!user) {
     return res.status(404).send('User not found');
   }
@@ -22,4 +22,4 @@ router.post('/courses/:id/enroll', async (req, res) => {
   res.status(200).send('Enrolled in course');
 });
 
-module.exports = router;
+export default router;

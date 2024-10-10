@@ -1,7 +1,8 @@
+// src/pages/CourseList.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-import { Container, Typography, List, ListItem, ListItemText, CircularProgress } from '@mui/material';
+import { Container, Grid, CircularProgress } from '@mui/material';
+import CourseCard from '../components/CourseCard';
 
 const CourseList = () => {
   const [courses, setCourses] = useState([]);
@@ -22,16 +23,13 @@ const CourseList = () => {
 
   return (
     <Container>
-      <Typography variant="h4" gutterBottom>
-        Courses
-      </Typography>
-      <List>
+      <Grid container spacing={4}>
         {courses.map(course => (
-          <ListItem key={course._id} button component={Link} to={`/courses/${course._id}`}>
-            <ListItemText primary={course.title} />
-          </ListItem>
+          <Grid item key={course._id} xs={12} sm={6} md={4}>
+            <CourseCard course={course} />
+          </Grid>
         ))}
-      </List>
+      </Grid>
     </Container>
   );
 };

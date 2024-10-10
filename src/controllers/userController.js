@@ -1,11 +1,11 @@
 // src/controllers/userController.js
-const express = require('express');
-const router = express.Router();
-const User = require('../models/User'); // Assume we have a User model
+import { Router } from 'express';
+const router = Router();
+import { findById } from '../models/User'; // Assume we have a User model
 
 // Get User Profile
 router.get('/profile', async (req, res) => {
-  const user = await User.findById(req.user.id); // Assume req.user is set after authentication
+  const user = await findById(req.user.id); // Assume req.user is set after authentication
 
   if (!user) {
     return res.status(404).send('User not found');
@@ -17,7 +17,7 @@ router.get('/profile', async (req, res) => {
 // Update User Profile
 router.put('/profile', async (req, res) => {
   const { name, email } = req.body;
-  const user = await User.findById(req.user.id);
+  const user = await findById(req.user.id);
 
   if (!user) {
     return res.status(404).send('User not found');
@@ -30,4 +30,4 @@ router.put('/profile', async (req, res) => {
   res.status(200).json(user);
 });
 
-module.exports = router;
+export default router;

@@ -1,5 +1,5 @@
-t mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import { Schema as _Schema, model } from 'mongoose';
+const Schema = _Schema;
 
 const UserActivitySchema = new Schema({
   userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
@@ -8,4 +8,4 @@ const UserActivitySchema = new Schema({
   rating: { type: Number, min: 1, max: 5 }
 }, { timestamps: true });
 
-module.exports = mongoose.model('UserActivity', UserActivitySchema);
+export default model('UserActivity', UserActivitySchema);

@@ -1,5 +1,5 @@
-t UserActivity = require('../models/UserActivity');
-const Course = require('../models/Course');
+import UserActivity from '../models/UserActivity';
+import { find } from '../models/Course';
 
 const getRecommendedCourses = async (userId) => {
   // Fetch activities of the user
@@ -20,9 +20,9 @@ const getRecommendedCourses = async (userId) => {
 
   // Sort courses by recommendation score and fetch course details
   const recommendedCourseIds = Object.keys(courseRecommendations).sort((a, b) => courseRecommendations[b] - courseRecommendations[a]);
-  const recommendedCourses = await Course.find({ _id: { $in: recommendedCourseIds } });
+  const recommendedCourses = await find({ _id: { $in: recommendedCourseIds } });
 
   return recommendedCourses;
 };
 
-module.exports = { getRecommendedCourses };
+export default { getRecommendedCourses };

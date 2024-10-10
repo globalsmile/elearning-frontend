@@ -1,25 +1,25 @@
 // src/controllers/authController.js
-const express = require('express');
-const router = express.Router();
-const User = require('../models/User'); // Assume we have a User model
-const crypto = require('crypto');
-const nodemailer = require('nodemailer');
+import { Router } from 'express';
+const router = Router();
+import { findOne } from '../models/User'; // Assume we have a User model
+import { randomBytes } from 'crypto';
+import { createTransport } from 'nodemailer';
 
 // Forgot Password
 router.post('/forgot-password', async (req, res) => {
   const { email } = req.body;
-  const user = await User.findOne({ email });
+  const user = await findOne({ email });
 
   if (!user) {
     return res.status(404).send('User not found');
   }
 
-  const token = crypto.randomBytes(20).toString('hex');
+  const token = randomBytes(20).toString('hex');
   user.resetPasswordToken = token;
   user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
   await user.save();
 
-  const transporter = nodemailer.createTransport({ /* SMTP settings */ });
+  const transporter = createTransport({ /* SMTP settings */ });
   const mailOptions = {
     to: user.email,
     from: 'passwordreset@demo.com',
@@ -41,7 +41,7 @@ router.post('/forgot-password', async (req, res) => {
 // Reset Password
 router.post('/reset-password', async (req, res) => {
   const { token, newPassword } = req.body;
-  const user = await User.findOne({
+  const user = await findOne({
     resetPasswordToken: token,
     resetPasswordExpires: { $gt: Date.now() }
   });
@@ -58,4 +58,4 @@ router.post('/reset-password', async (req, res) => {
   res.status(200).send('Password has been reset');
 });
 
-module.exports = router;
+export default router;
