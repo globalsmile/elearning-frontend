@@ -1,6 +1,6 @@
 // src/App.js
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Updated import
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
@@ -23,13 +23,13 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <Switch>
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={SignUp} />
-          <Route path="/forgot-password" component={ForgotPassword} />
-          <Route path="/reset-password/:token" component={ResetPassword} />
-          <Route path="/dashboard" component={Dashboard} /> {/* Updated Route */}
-        </Switch>
+        <Routes> {/* Updated to use Routes */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
+          <Route path="/dashboard" element={<Dashboard />} /> {/* Updated Route */}
+        </Routes>
       </Router>
     </ThemeProvider>
   );
