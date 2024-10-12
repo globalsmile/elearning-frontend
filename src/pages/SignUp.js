@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { Container, TextField, Button, Typography, Box } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Dispatch the sign-up action
+    navigate('/dashboard'); // Route to dashboard
   };
 
   return (
@@ -52,6 +56,9 @@ const SignUp = () => {
           >
             Sign Up
           </Button>
+        </Box>
+        <Box sx={{ mt: 2 }}>
+          <Link to="/forgot-password">Forgot Password?</Link>
         </Box>
       </Box>
     </Container>
